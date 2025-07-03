@@ -1,0 +1,1681 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ICST University Park</title>
+  <!-- Font Awesome for Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+    /* --- Custom Top Header and Navigation Styles --- */
+    /* Logo Animation */
+    .logo-area img {
+      transition: transform 0.4s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.3s;
+    }
+    .logo-area img:hover {
+      transform: scale(1.12) rotate(-6deg);
+      box-shadow: 0 6px 24px #007bff33;
+    }
+
+    /* Header Button Pulse */
+    .header-buttons .red-btn, .header-buttons .call-btn {
+      animation: pulseBtn 2.2s infinite;
+    }
+    @keyframes pulseBtn {
+      0% { box-shadow: 0 0 0 0 #d32f2f44; }
+      70% { box-shadow: 0 0 0 10px #d32f2f00; }
+      100% { box-shadow: 0 0 0 0 #d32f2f00; }
+    }
+    .header-buttons .call-btn {
+      animation-delay: 1.1s;
+    }
+
+    /* Social Icon Hover Pop */
+    .social-icons img {
+      transition: filter 0.2s, transform 0.25s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .social-icons img:hover {
+      transform: scale(1.18) rotate(8deg);
+    }
+
+    /* Feature Card Fade-in Animation */
+    .feature {
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      transition: opacity 0.7s, transform 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .feature.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Button Glow on Hover */
+    .btn:hover, .btn:focus, .btn:active {
+      box-shadow: 0 0 16px #007bff55;
+      background: #007bff;
+      color: #fff;
+      outline: none;
+    }
+
+    /* Modal Pop Animation */
+    .modal-content {
+      animation: fadeIn 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+
+    /* Section Title Underline */
+    h2, .admissions-title {
+      position: relative;
+      display: inline-block;
+    }
+    h2::after, .admissions-title::after {
+      content: '';
+      display: block;
+      width: 60%;
+      height: 3px;
+      background: linear-gradient(90deg, #007bff, #003366);
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
+      opacity: 0.18;
+    }
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f5f5f5;
+      padding: 10px 20px;
+      border-bottom: 1px solid #e0e0e0;
+      z-index: 1100;
+      position: relative;
+    }
+    .social-icons img {
+      width: 24px;
+      margin-right: 10px;
+      vertical-align: middle;
+      filter: grayscale(0.3);
+      transition: filter 0.2s;
+      cursor: pointer;
+    }
+    .social-icons img:hover {
+      filter: grayscale(0) drop-shadow(0 2px 4px #007bff33);
+    }
+    .logo-area {
+      text-align: center;
+      flex: 1;
+    }
+    .logo-area img {
+      height: 50px;
+      vertical-align: middle;
+      margin-bottom: 2px;
+    }
+    .logo-area h1 {
+      font-size: 1.2rem;
+      margin: 0;
+      color: #003366;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .red-btn, .call-btn {
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+      padding: 7px 16px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .red-btn:hover, .call-btn:hover {
+      background-color: #b71c1c;
+    }
+    .call-btn {
+      background-color: #007bff;
+    }
+    .call-btn:hover {
+      background-color: #0056b3;
+    }
+    .header-buttons span {
+      font-size: 1.3rem;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    .main-nav {
+      background-color: #333;
+      color: white;
+      border-bottom: 2px solid #007bff;
+      z-index: 1099;
+      position: relative;
+    }
+    .main-nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      margin: 0;
+      gap: 0.5rem;
+    }
+    .main-nav li {
+      margin: 0 15px;
+    }
+    .main-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 3px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .main-nav a.active, .main-nav a:hover {
+      color: #fff;
+      background: #007bff;
+    }
+    .main-nav .top-links {
+      border-bottom: 1px solid #444;
+      margin-bottom: -5px;
+    }
+    .main-nav .bottom-links {
+      margin-top: -5px;
+    }
+    @media (max-width: 900px) {
+      .top-header, .main-nav ul {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .main-nav ul {
+        gap: 0;
+      }
+      .main-nav li {
+        margin: 0 0 8px 0;
+      }
+      .logo-area h1 {
+        font-size: 1rem;
+      }
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #003366;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem;
+      background: linear-gradient(135deg, #003366, #007bff);
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      background: white;
+      color: #007bff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #e0e0e0;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 3rem 1rem;
+      background: #f9f9f9;
+      gap: 2rem;
+    }
+
+
+    .feature {
+      background: #fff;
+      backdrop-filter: blur(8px) saturate(1.2);
+      -webkit-backdrop-filter: blur(8px) saturate(1.2);
+      margin: 1.5rem;
+      padding: 2.5rem 1.5rem 2rem 1.5rem;
+      width: 280px;
+      border-radius: 22px;
+      text-align: center;
+      box-shadow: 0 8px 32px #16a08522, 0 2px 8px #e67e2211;
+      border: 2px solid #e67e22;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.32s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.32s, border 0.22s, background 0.22s;
+      flex-shrink: 0;
+    }
+
+    .feature-icon-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 1.2rem auto;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #e67e22 0%, #16a085 100%);
+      box-shadow: 0 2px 12px #16a08522, 0 1px 0 #fff8 inset;
+      border: 2.5px solid #e67e22;
+      position: relative;
+      z-index: 3;
+      transition: box-shadow 0.22s, border 0.22s, background 0.22s;
+    }
+
+    .feature:hover .feature-icon-box,
+    .feature:focus-within .feature-icon-box,
+    .feature:active .feature-icon-box {
+      background: linear-gradient(135deg, #16a085 0%, #e67e22 100%);
+      box-shadow: 0 4px 24px #e67e2255, 0 2px 8px #16a08522;
+      border: 2.5px solid #16a085;
+    }
+
+    .feature-icon-box i {
+      font-size: 2.5rem;
+      color: #e67e22;
+      transition: color 0.22s, filter 0.22s, text-shadow 0.22s;
+      filter: drop-shadow(0 2px 8px #e67e2222);
+      animation: none;
+    }
+
+    .feature:hover .feature-icon-box i,
+    .feature:focus-within .feature-icon-box i,
+    .feature:active .feature-icon-box i {
+      color: #16a085;
+      filter: drop-shadow(0 4px 16px #fff) drop-shadow(0 2px 8px #16a08555);
+      animation: featureIconPulse 1.2s infinite alternate;
+      text-shadow: 0 2px 8px #16a08555;
+    }
+
+    .feature::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 7px;
+      background: linear-gradient(90deg, #e67e22 0%, #16a085 100%);
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+      z-index: 2;
+      opacity: 0.85;
+    }
+
+    .feature:hover, .feature:focus-within, .feature:active {
+      transform: translateY(-12px) scale(1.045);
+      background: rgba(230,126,34,0.10);
+      box-shadow: 0 12px 36px #e67e2233, 0 2px 8px #16a08522;
+      border: 2px solid #16a085;
+    }
+
+    .feature i {
+      font-size: 2.5rem;
+      color: #e67e22;
+      margin-bottom: 0.7rem;
+      transition: color 0.22s, filter 0.22s, text-shadow 0.22s;
+      filter: drop-shadow(0 2px 8px #e67e2222);
+      animation: none;
+    }
+
+    .feature:hover i, .feature:focus-within i, .feature:active i {
+      color: #16a085;
+      filter: drop-shadow(0 4px 16px #16a08555);
+      animation: featureIconPulse 1.2s infinite alternate;
+      text-shadow: 0 2px 8px #16a08555;
+    }
+
+    @keyframes featureIconPulse {
+      0% { color: #e67e22; filter: drop-shadow(0 2px 8px #e67e2233); }
+      100% { color: #16a085; filter: drop-shadow(0 6px 24px #16a08577); }
+    }
+
+    .feature h3 {
+      font-family: 'Montserrat','Segoe UI',Arial,sans-serif;
+      font-size: 1.18rem;
+      font-weight: 800;
+      color: #16a085;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.2px;
+      z-index: 3;
+      position: relative;
+      text-shadow: 0 1px 0 #fff8, 0 2px 8px #16a08511;
+    }
+
+    .feature p {
+      font-size: 1.01rem;
+      color: #16a085;
+      font-weight: 500;
+      z-index: 3;
+      position: relative;
+      text-shadow: 0 1px 0 #fff8;
+    }
+
+    .feature:focus-within {
+      outline: 2.5px solid #e67e22;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .feature {
+        width: 98vw;
+        min-width: 220px;
+        max-width: 98vw;
+        margin: 0.7rem auto;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #f1f3f5;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        display: none;
+      }
+
+      nav ul.active {
+        display: flex;
+        background: white;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        padding: 1rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+
+      #menu-toggle {
+        display: block;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+
+    #menu-toggle {
+      display: none;
+    }
+
+    /* MODAL STYLES */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-content {
+      background: #fff;
+      margin: 10% auto;
+      padding: 2rem;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-content h2 {
+      margin-bottom: 1rem;
+      color: #007bff;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .modal-content button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal-content button:hover {
+      background: #0056b3;
+    }
+
+    .modal-content a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    /* Navigation Search Icon Only */
+    .nav-search-bar {
+      margin-left: 1.5rem;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .nav-search-bar button#nav-search-icon {
+      background: none;
+      border: none;
+      color: #007bff;
+      font-size: 1.35rem;
+      cursor: pointer;
+      padding: 0 8px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.18s;
+    }
+    .nav-search-bar button#nav-search-icon:focus,
+    .nav-search-bar button#nav-search-icon:hover {
+      color: #003366;
+      outline: none;
+    }
+    @media (max-width: 900px) {
+      .nav-search-bar {
+        margin: 1rem auto 0.5rem auto !important;
+        width: auto;
+        justify-content: center;
+      }
+    }
+
+    /* Floating ICST Logo on Scroll */
+    #icst-floating-logo {
+      position: fixed;
+      top: 50%;
+      left: 24px;
+      transform: translateY(-50%);
+      z-index: 9999;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      box-shadow: 0 4px 16px #007bff33;
+      background: #fff;
+      padding: 6px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+    #icst-floating-logo.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Floating Note Box on Left Side */
+    #icst-floating-note-box {
+      position: fixed;
+      top: 50%;
+      left: 110px;
+      transform: translateY(-50%);
+      z-index: 9999;
+      background: linear-gradient(135deg,#e0f7fa 0%,#f3e5f5 100%);
+      color: #0e7c7b;
+      border-radius: 16px;
+      box-shadow: 0 6px 24px #0e7c7b22;
+      padding: 22px 32px;
+      font-size: 1.13rem;
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      font-weight: 600;
+      opacity: 0.97;
+      min-width: 140px;
+      max-width: 260px;
+      display: none;
+      border: 2px solid #0e7c7b33;
+    }
+    #icst-floating-logo.visible + #icst-floating-note-box {
+      display: block;
+    }
+
+    /* Advantages Section Styles */
+    .advantages-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .advantage-card {
+      background: linear-gradient(135deg, #e0f7fa 0%, #f3e5f5 100%);
+      border-radius: 18px;
+      box-shadow: 0 6px 24px #0e7c7b22, 0 2px 8px #7c43bd11;
+      padding: 2.2rem 1.3rem 1.7rem 1.3rem;
+      max-width: 320px;
+      min-width: 240px;
+      flex: 1 1 260px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      animation: fadeInAdvantage 0.8s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+      animation-delay: var(--delay, 0s);
+      transition: box-shadow 0.22s, transform 0.22s;
+      position: relative;
+    }
+    .advantage-card:hover, .advantage-card:focus-within {
+      box-shadow: 0 12px 36px #7c43bd33, 0 2px 8px #0e7c7b22;
+      transform: translateY(-10px) scale(1.04);
+      background: linear-gradient(135deg, #f3e5f5 0%, #e0f7fa 100%);
+    }
+    .advantage-icon {
+      font-size: 2.7rem;
+      color: #0e7c7b;
+      margin-bottom: 1.1rem;
+      background: #fff;
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px #0e7c7b22;
+      margin-left: auto;
+      margin-right: auto;
+      transition: background 0.18s, color 0.18s;
+    }
+    .advantage-card:hover .advantage-icon {
+      background: #0e7c7b;
+      color: #fff;
+    }
+    .advantage-card h4 {
+      color: #0e7c7b;
+      font-size: 1.18rem;
+      font-weight: 800;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.2px;
+      font-family: 'Montserrat','Segoe UI',Arial,sans-serif;
+    }
+    .advantage-card p {
+      color: #333;
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+    @keyframes fadeInAdvantage {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    @media (max-width: 900px) {
+      .advantages-cards {
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .advantage-card {
+        min-width: 90vw;
+        max-width: 98vw;
+        margin: 0.7rem auto;
+      }
+    }
+
+    /* Video Section Styles */
+    .video-container {
+      width: 100vw;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .video-container video {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px #00336633;
+      outline: none;
+      background: #000;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- New Top Header and Navigation -->
+<div class="top-header>
+  <div class="social-icons">
+    <!-- Social icons removed as requested -->
+  </div>
+  <div class="logo-area">
+    <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/OIP (1).webp" alt="ICST Logo" style="height:50px;margin-right:12px;vertical-align:middle;display:inline-block;" />
+    <h1 style="font-size:1.2rem;margin:0;color:#003366;display:inline-block;vertical-align:middle;">INTERNATIONAL CAMPUS OF SCIENCE AND TECHNOLOGY</h1>
+  </div>
+  <div class="header-buttons">
+    <!-- Search bar removed -->
+  </div>
+</div>
+<nav class="main-nav">
+  <ul class="top-links">
+    <!-- About removed as requested -->
+  </ul>
+  <div style="display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+    <form class="nav-search-bar" role="search" style="margin-right:1.5rem;display:flex;align-items:center;position:relative;">
+      <button type="button" id="nav-search-icon" style="background:none;border:none;color:#007bff;font-size:1.35rem;cursor:pointer;padding:0 8px 0 0;display:flex;align-items:center;justify-content:center;">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+    <ul class="bottom-links" style="margin:0;">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#campus">Campus Life</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#founder-vision">Founder</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Old header removed, navigation merged above -->
+
+    <div style="width:100vw; position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:1.5rem;">
+      <!-- Old home page image removed as requested -->
+      <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/jahirzha.jpg" alt="ICST Home Highlight" style="width:100vw; max-width:900px; height:320px; object-fit:cover; display:block; margin:0 auto; border-radius: 24px; box-shadow: 0 8px 32px #7c43bd33, 0 2px 8px #00336622; background:none; animation: fadeInUp 1.5s;" />
+      <div style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; z-index:2; background:none; text-align:center;">
+        <h1 class="hero-animate-text" style="font-size:3rem; font-weight:800; margin-bottom:1.2rem; text-shadow:0 4px 24px #999a9c99, 0 1px 0 #222; letter-spacing:1px; color:#fff !important; width:100%; text-align:center;">Welcome to ICST University Park</h1>
+        <!-- <p class="hero-animate-text" style="font-size:1.4rem; font-weight:500; margin-bottom:1.2rem; text-shadow:0 2px 8px #9ea2a7d1; color:#fff !important; width:100%; max-width:700px; margin-left:auto; margin-right:auto; text-align:center;">Empowering the next generation of leaders, innovators, and thinkers.</p> -->
+        <!-- Apply Now button removed as requested -->
+      </div>
+    </div>
+  <!-- Animation: Hero image fade-in -->
+  <div id="hero-anim" style="display:none;"></div>
+<style>
+  /* Animation for hero image fade-in */
+  .hero img {
+    opacity: 0;
+    transform: scale(1.04) translateY(40px);
+    transition: opacity 1.2s cubic-bezier(.68,-0.55,.27,1.55), transform 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+  }
+  .hero img.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  /* Animation for hero text */
+  .hero h1, .hero p, .hero .btn {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(.68,-0.55,.27,1.55), transform 1s cubic-bezier(.68,-0.55,.27,1.55);
+  }
+  .hero h1.visible, .hero p.visible, .hero .btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Animated text effect for hero */
+  .hero-animate-text {
+    display: inline-block;
+    background: linear-gradient(90deg, #ff9800, #ffc107, #007bff, #003366);
+    background-size: 200% auto;
+    color: #003366;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: heroTextGradient 3.5s linear infinite alternate, heroTextPop 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+  }
+  @keyframes heroTextGradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+  @keyframes heroTextPop {
+    0% { letter-spacing: 0.1em; filter: blur(2px) brightness(0.7); opacity: 0.2; }
+    60% { letter-spacing: 0.12em; filter: blur(0.5px) brightness(1.1); opacity: 1; }
+    100% { letter-spacing: 0.04em; filter: blur(0) brightness(1.2); opacity: 1; }
+  }
+</style>
+<style>
+  /* Navigation Search Icon Only */
+  .nav-search-bar {
+    margin-left: 1.5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .nav-search-bar button#nav-search-icon {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 1.35rem;
+    cursor: pointer;
+    padding: 0 8px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.18s;
+  }
+  .nav-search-bar button#nav-search-icon:focus,
+  .nav-search-bar button#nav-search-icon:hover {
+    color: #003366;
+    outline: none;
+  }
+  @media (max-width: 900px) {
+    .nav-search-bar {
+      margin: 1rem auto 0.5rem auto !important;
+      width: auto;
+      justify-content: center;
+    }
+  }
+</style>
+<script>
+  // Animate hero image and text on load
+  window.addEventListener('DOMContentLoaded', function() {
+    var heroImg = document.querySelector('.hero img');
+    var heroH1 = document.querySelector('.hero-animate-text');
+    var heroP = document.querySelectorAll('.hero-animate-text')[1];
+    var heroBtn = document.querySelector('.hero .btn');
+    setTimeout(function() {
+      if(heroImg) heroImg.classList.add('visible');
+    }, 100);
+    setTimeout(function() {
+      if(heroH1) heroH1.classList.add('visible');
+    }, 500);
+    setTimeout(function() {
+      if(heroP) heroP.classList.add('visible');
+    }, 800);
+    setTimeout(function() {
+      if(heroBtn) heroBtn.classList.add('visible');
+    }, 1100);
+  });
+</script>
+
+
+
+<!-- Chairman & Founder Section Modernized -->
+<section id="chairman-founder-modern">
+  <div class="cf-cards">
+    <div class="cf-card cf-animate-left">
+      <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/WhatsApp Image 2025-07-02 at 20.06.56_a602f587.jpg" alt="Chairman">
+      <div class="cf-title">Message from the Chairman</div>
+      <div class="cf-name">Eng. M.H.A HIRAS</div>
+    </div>
+    <div class="cf-card cf-animate-right">
+      <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/WhatsApp Image 2025-07-02 at 20.06.52_20216651.jpg" alt="Founder">
+      <div class="cf-title founder">Founder’s Vision</div>
+      <div class="cf-name founder">Founder</div>
+    </div>
+  </div>
+  <div class="cf-message cf-animate-fade">
+    <h3>A New Era of Opportunity</h3>
+    <p>
+      Welcome to ICST University Park, where learning and innovation meet. Our mission is to break barriers and empower every student, regardless of background, to achieve their dreams through transformative, job-oriented higher education.
+    </p>
+    <p>
+      At ICST, we believe in inclusivity and equal opportunity. Our founder’s vision is a university where financial limitations never stand in the way of ambition. Here, you’ll find a supportive environment, world-class faculty, and a community dedicated to your success.
+    </p>
+    <p>
+      Join us on this remarkable journey—where your future begins, and every aspiration is within reach.
+    </p>
+  </div>
+</section>
+
+<style>
+#chairman-founder-modern {
+  background: linear-gradient(135deg, #f8fafc 60%, #e3f2fd 100%);
+  padding: 2.5rem 1rem 2rem 1rem;
+  border-radius: 28px;
+  box-shadow: 0 4px 32px #7c43bd11;
+  margin: 2rem auto;
+  max-width: 1100px;
+  position: relative;
+  overflow: hidden;
+}
+.cf-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.2rem;
+}
+.cf-card {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 8px 32px #7c43bd22, 0 2px 8px #007bff11;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  min-width: 220px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.4s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.3s;
+  animation-duration: 1.2s;
+  animation-fill-mode: both;
+}
+.cf-card:hover {
+  transform: translateY(-10px) scale(1.04);
+  box-shadow: 0 16px 48px #7c43bd33, 0 4px 16px #007bff22;
+}
+.cf-card img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px #7c43bd33;
+  margin-bottom: 1.1rem;
+  border: 4px solid #e3f2fd;
+}
+.cf-title {
+  color: #7c43bd;
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.cf-title.founder {
+  color: #007bff;
+}
+.cf-name {
+  color: #003366;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  text-align: center;
+}
+.cf-name.founder {
+  color: #007bff;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.cf-message {
+  margin-top: 1.5rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #7c43bd11;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  text-align: center;
+  animation-duration: 1.2s;
+  animation-fill-mode: both;
+}
+.cf-message h3 {
+  color: #7c43bd;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  letter-spacing: 1px;
+}
+.cf-message p {
+  font-size: 1.13rem;
+  color: #003366;
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+@keyframes cfSlideLeft {
+  from { opacity: 0; transform: translateX(-60px) scale(0.96); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes cfSlideRight {
+  from { opacity: 0; transform: translateX(60px) scale(0.96); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes cfFadeIn {
+  from { opacity: 0; transform: translateY(40px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.cf-animate-left {
+  animation-name: cfSlideLeft;
+}
+.cf-animate-right {
+  animation-name: cfSlideRight;
+}
+.cf-animate-fade {
+  animation-name: cfFadeIn;
+}
+@media (max-width: 900px) {
+  .cf-cards {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .cf-card {
+    max-width: 98vw;
+    margin: 0 auto;
+  }
+}
+</style>
+    </div>
+  </div>
+</section>
+
+
+<!-- Features Section -->
+<section class="features" id="features">
+  <div style="width:100%;max-width:1100px;margin:0 auto 2.5rem auto;">
+    <h2 style="display:block;width:100%;text-align:center;font-size:2.3rem;color:#0e7c7b;font-family:'Montserrat','Segoe UI',Arial,sans-serif;font-weight:900;letter-spacing:1px;margin-bottom:2.2rem;text-transform:uppercase;">Why Choose ICST?</h2>
+    <div style="background:linear-gradient(135deg,#e0f7fa 0%,#f3e5f5 100%);border-radius:18px;box-shadow:0 6px 32px #0e7c7b22;padding:2.5rem 1.5rem 2rem 1.5rem;max-width:900px;margin:0 auto;">
+      <h3 style="color:#0e7c7b;font-size:1.4rem;font-weight:800;margin-bottom:2.2rem;text-align:center;letter-spacing:1px;">Our Advantages</h3>
+      <div class="advantages-cards" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+        <div class="advantage-card" style="--delay:0s; background: linear-gradient(135deg, #f3e5f5 0%, #e0f7fa 100%); border: 3px solid #7c43bd; border-radius: 22px; box-shadow: 0 8px 32px #7c43bd22, 0 2px 8px #16a08511; padding: 2.2rem 1.3rem 1.7rem 1.3rem; max-width: 320px; min-width: 240px; flex: 1 1 260px; text-align: center;">
+          <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/DSC09941-480x554.jpg" alt="Expert Educators" style="width:100%;max-width:180px;height:120px;object-fit:cover;border-radius:14px;margin-bottom:1rem;box-shadow:0 2px 8px #7c43bd33;" />
+          <div class="advantage-icon" style="font-size: 2.7rem; color: #7c43bd; background: #fff; border-radius: 50%; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 12px #7c43bd22; margin-left: auto; margin-right: auto; margin-bottom: 1.1rem;"><i class="fas fa-chalkboard-teacher"></i></div>
+          <h4 style="color: #7c43bd; font-size: 1.18rem; font-weight: 800; margin-bottom: 0.7rem; letter-spacing: 0.2px; font-family: 'Montserrat','Segoe UI',Arial,sans-serif;">Expert Educators</h4>
+          <p style="color: #333; font-size: 1.05rem; font-weight: 500; margin-bottom: 0;">Learn from passionate teachers and industry leaders who bring real-world experience to every class.</p>
+        </div>
+        <div class="advantage-card" style="--delay:0.1s; background: linear-gradient(135deg, #e0f7fa 0%, #f3e5f5 100%); border: 3px solid #16a085; border-radius: 22px; box-shadow: 0 8px 32px #16a08522, 0 2px 8px #7c43bd11; padding: 2.2rem 1.3rem 1.7rem 1.3rem; max-width: 320px; min-width: 240px; flex: 1 1 260px; text-align: center;">
+          <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/DSC09967_1-480x554.jpg" alt="Innovation Labs" style="width:100%;max-width:180px;height:120px;object-fit:cover;border-radius:14px;margin-bottom:1rem;box-shadow:0 2px 8px #16a08533;" />
+          <div class="advantage-icon" style="font-size: 2.7rem; color: #16a085; background: #fff; border-radius: 50%; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 12px #16a08522; margin-left: auto; margin-right: auto; margin-bottom: 1.1rem;"><i class="fas fa-flask"></i></div>
+          <h4 style="color: #16a085; font-size: 1.18rem; font-weight: 800; margin-bottom: 0.7rem; letter-spacing: 0.2px; font-family: 'Montserrat','Segoe UI',Arial,sans-serif;">Innovation Labs</h4>
+          <p style="color: #333; font-size: 1.05rem; font-weight: 500; margin-bottom: 0;">Explore, experiment, and create in our advanced labs designed for hands-on discovery and innovation.</p>
+        </div>
+        <div class="advantage-card" style="--delay:0.2s; background: linear-gradient(135deg, #f3e5f5 0%, #e0f7fa 100%); border: 3px solid #e67e22; border-radius: 22px; box-shadow: 0 8px 32px #e67e2222, 0 2px 8px #16a08511; padding: 2.2rem 1.3rem 1.7rem 1.3rem; max-width: 320px; min-width: 240px; flex: 1 1 260px; text-align: center;">
+          <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/DSC099861-480x554.jpg" alt="Global Exposure" style="width:100%;max-width:180px;height:120px;object-fit:cover;border-radius:14px;margin-bottom:1rem;box-shadow:0 2px 8px #e67e2233;" />
+          <div class="advantage-icon" style="font-size: 2.7rem; color: #e67e22; background: #fff; border-radius: 50%; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 12px #e67e2222; margin-left: auto; margin-right: auto; margin-bottom: 1.1rem;"><i class="fas fa-globe"></i></div>
+          <h4 style="color: #e67e22; font-size: 1.18rem; font-weight: 800; margin-bottom: 0.7rem; letter-spacing: 0.2px; font-family: 'Montserrat','Segoe UI',Arial,sans-serif;">Global Exposure</h4>
+          <p style="color: #333; font-size: 1.05rem; font-weight: 500; margin-bottom: 0;">Broaden your horizons with international study programs and cultural exchange opportunities.</p>
+        </div>
+        <div class="advantage-card" style="--delay:0.3s; background: linear-gradient(135deg, #e0f7fa 0%, #f3e5f5 100%); border: 3px solid #003366; border-radius: 22px; box-shadow: 0 8px 32px #00336622, 0 2px 8px #7c43bd11; padding: 2.2rem 1.3rem 1.7rem 1.3rem; max-width: 320px; min-width: 240px; flex: 1 1 260px; text-align: center;">
+          <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/DSC099911-1-480x554.jpg" alt="Smart Campus" style="width:100%;max-width:180px;height:120px;object-fit:cover;border-radius:14px;margin-bottom:1rem;box-shadow:0 2px 8px #00336633;" />
+          <div class="advantage-icon" style="font-size: 2.7rem; color: #003366; background: #fff; border-radius: 50%; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 12px #00336622; margin-left: auto; margin-right: auto; margin-bottom: 1.1rem;"><i class="fas fa-school"></i></div>
+          <h4 style="color: #003366; font-size: 1.18rem; font-weight: 800; margin-bottom: 0.7rem; letter-spacing: 0.2px; font-family: 'Montserrat','Segoe UI',Arial,sans-serif;">Smart Campus</h4>
+          <p style="color: #333; font-size: 1.05rem; font-weight: 500; margin-bottom: 0;">Enjoy modern classrooms, digital resources, and inspiring spaces for learning and collaboration.</p>
+        </div>
+        <div class="advantage-card" style="--delay:0.4s; background: linear-gradient(135deg, #f3e5f5 0%, #e0f7fa 100%); border: 3px solid #d32f2f; border-radius: 22px; box-shadow: 0 8px 32px #d32f2f22, 0 2px 8px #16a08511; padding: 2.2rem 1.3rem 1.7rem 1.3rem; max-width: 320px; min-width: 240px; flex: 1 1 260px; text-align: center;">
+          <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/DSC09919-1-480x554 (1).jpg" alt="Career Launchpad" style="width:100%;max-width:180px;height:120px;object-fit:cover;border-radius:14px;margin-bottom:1rem;box-shadow:0 2px 8px #d32f2f33;" />
+          <div class="advantage-icon" style="font-size: 2.7rem; color: #d32f2f; background: #fff; border-radius: 50%; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 12px #d32f2f22; margin-left: auto; margin-right: auto; margin-bottom: 1.1rem;"><i class="fas fa-rocket"></i></div>
+          <h4 style="color: #d32f2f; font-size: 1.18rem; font-weight: 800; margin-bottom: 0.7rem; letter-spacing: 0.2px; font-family: 'Montserrat','Segoe UI',Arial,sans-serif;">Career Launchpad</h4>
+          <p style="color: #333; font-size: 1.05rem; font-weight: 500; margin-bottom: 0;">Get support for internships, job placements, and career planning from our dedicated team.</p>
+        </div>
+        <div class="advantage-card" style="--delay:0.5s; background: linear-gradient(135deg, #e0f7fa 0%, #f3e5f5 100%); border: 3px solid #0e7c7b; border-radius: 22px; box-shadow: 0 8px 32px #0e7c7b22, 0 2px 8px #7c43bd11; padding: 2.2rem 1.3rem 1.7rem 1.3rem; max-width: 320px; min-width: 240px; flex: 1 1 260px; text-align: center;">
+          <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/DSC09934-1-480x554 (1).jpg" alt="Student Wellbeing" style="width:100%;max-width:180px;height:120px;object-fit:cover;border-radius:14px;margin-bottom:1rem;box-shadow:0 2px 8px #0e7c7b33;" />
+          <div class="advantage-icon" style="font-size: 2.7rem; color: #0e7c7b; background: #fff; border-radius: 50%; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 12px #0e7c7b22; margin-left: auto; margin-right: auto; margin-bottom: 1.1rem;"><i class="fas fa-heartbeat"></i></div>
+          <h4 style="color: #0e7c7b; font-size: 1.18rem; font-weight: 800; margin-bottom: 0.7rem; letter-spacing: 0.2px; font-family: 'Montserrat','Segoe UI',Arial,sans-serif;">Student Wellbeing</h4>
+          <p style="color: #333; font-size: 1.05rem; font-weight: 500; margin-bottom: 0;">Access health services, counseling, and wellness programs for a balanced student life.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="programs" class="container" style="background:#fff;padding:2rem 1rem;margin:2rem auto;border-radius:12px;max-width:1100px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+  <h2 style="display:block;width:100%;text-align:center;font-size:2.3rem;color:#e67e22;font-family:'Montserrat','Segoe UI',Arial,sans-serif;font-weight:900;letter-spacing:1px;margin-bottom:2.2rem;text-transform:uppercase;">Academic Programs</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
+    <div class="program-box" tabindex="0" data-program="hdit">
+      <!-- <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/WhatsApp Image 2025-07-01 at 12.36.16_6793f3c0.jpg" alt="HDIT" style="width:100%;max-width:220px;border-radius:14px;margin-bottom:1rem;object-fit:cover;box-shadow:0 2px 8px #16a08533;"> -->
+      <div class="program-icon" style="background:linear-gradient(135deg,#e67e22 0%,#16a085 100%);color:#fff;"><i class="fas fa-laptop-code"></i></div>
+      <h3>HDIT<br><span class="program-sub">Higher Diploma in Information Technology</span></h3>
+      <ul><li>Software Development</li><li>Networking</li><li>Database Management</li></ul>
+    </div>
+    <div class="program-box" tabindex="0" data-program="hdqs">
+      <!-- <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/WhatsApp Image 2025-07-01 at 12.36.00_a43b5f72.jpg" alt="HDQS" style="width:100%;max-width:220px;border-radius:14px;margin-bottom:1rem;object-fit:cover;box-shadow:0 2px 8px #16a08533;"> -->
+      <div class="program-icon" style="background:linear-gradient(135deg,#e67e22 0%,#16a085 100%);color:#fff;"><i class="fas fa-hard-hat"></i></div>
+      <h3>HDQS<br><span class="program-sub">Higher Diploma in Quantity Surveying</span></h3>
+      <ul><li>Construction Management</li><li>Cost Estimation</li><li>Project Planning</li></ul>
+    </div>
+    <div class="program-box" tabindex="0" data-program="acca">
+      <!-- <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/WhatsApp Image 2025-07-01 at 12.36.00_4194638b.jpg" alt="ACCA" style="width:100%;max-width:220px;border-radius:14px;margin-bottom:1rem;object-fit:cover;box-shadow:0 2px 8px #16a08533;"> -->
+      <div class="program-icon" style="background:linear-gradient(135deg,#e67e22 0%,#16a085 100%);color:#fff;"><i class="fas fa-calculator"></i></div>
+      <h3>ACCA<br><span class="program-sub">Association of Chartered Certified Accountants</span></h3>
+      <ul><li>Financial Accounting</li><li>Management Accounting</li><li>Taxation</li></ul>
+    </div>
+    <div class="program-box" tabindex="0" data-program="bait">
+      <!-- <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/WhatsApp Image 2025-07-01 at 12.36.15_b5482274.jpg" alt="BAIT" style="width:100%;max-width:220px;border-radius:14px;margin-bottom:1rem;object-fit:cover;box-shadow:0 2px 8px #16a08533;"> -->
+      <div class="program-icon" style="background:linear-gradient(135deg,#e67e22 0%,#16a085 100%);color:#fff;"><i class="fas fa-robot"></i></div>
+      <h3>BAIT<br><span class="program-sub">Bachelor of Applied in Information Technology</span></h3>
+      <ul><li>AI</li><li>IT Project Management</li><li>Cyber Security</li></ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .program-box {
+    flex: 1 1 320px;
+    min-width: 320px;
+    max-width: 400px;
+    background: linear-gradient(135deg, #e0f7fa 0%, #f3e5f5 100%);
+    padding: 2.5rem 1.7rem 2.2rem 1.7rem;
+    border-radius: 24px;
+    margin: 1.2rem 0.8rem;
+    box-shadow: 0 10px 36px #0e7c7b22, 0 2px 12px #7c43bd11;
+    border: 2.5px solid #0e7c7b;
+    position: relative;
+    text-align: center;
+    transition: transform 0.38s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.38s, border 0.18s, background 0.18s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    animation: programFadeIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+  }
+  .program-box:hover, .program-box:focus-within, .program-box:active {
+    background: linear-gradient(135deg, #f3e5f5 0%, #e0f7fa 100%);
+    box-shadow: 0 16px 48px #7c43bd33, 0 4px 16px #0e7c7b22;
+    border: 2.5px solid #7c43bd;
+    transform: translateY(-14px) scale(1.045) rotate(-1deg);
+  }
+  .program-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #7c43bd 0%, #0e7c7b 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.3rem auto;
+    font-size: 2.6rem;
+    color: #fff;
+    box-shadow: 0 4px 16px #7c43bd22, 0 1px 0 #fff8 inset;
+    border: 2.5px solid #0e7c7b;
+    transition: background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s;
+  }
+  .program-box:hover .program-icon,
+  .program-box:focus-within .program-icon,
+  .program-box:active .program-icon {
+    background: linear-gradient(135deg, #0e7c7b 0%, #7c43bd 100%);
+    color: #fff;
+    box-shadow: 0 8px 32px #7c43bd55, 0 2px 8px #0e7c7b22;
+    border: 2.5px solid #7c43bd;
+  }
+  @keyframes programFadeIn {
+    0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+</style>
+
+<style>
+  .program-details {
+    display: none;
+    background: #f9f9f9;
+    color: #16a085;
+    border-radius: 10px;
+    margin-top: 1.1rem;
+    padding: 1.1rem 1rem 1rem 1.2rem;
+    box-shadow: 0 2px 8px #e67e2211;
+    font-size: 1.01rem;
+    text-align: left;
+    transition: max-height 0.4s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.4s;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+  .program-box.active .program-details {
+    display: block;
+    max-height: 400px;
+    opacity: 1;
+    animation: fadeIn 0.5s;
+  }
+  .program-box {
+    cursor: pointer;
+    position: relative;
+  }
+  .program-box:after {
+    content: '\25BC';
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    font-size: 1.1rem;
+    color: #e67e2299;
+    transition: transform 0.3s;
+    pointer-events: none;
+  }
+  .program-box.active:after {
+    transform: rotate(180deg);
+    color: #16a085;
+  }
+  .program-box:focus {
+    outline: 2.5px solid #e67e22;
+    outline-offset: 2px;
+  }
+</style>
+
+<section id="campus" class="container campus-life-section" style="background:#fff;padding:2.5rem 1rem 2rem 1rem;margin:2rem auto;border-radius:18px;max-width:1150px;box-shadow:0 4px 24px #00336611;">
+  <h2 style="display:block;width:100%;text-align:center;font-size:2.3rem;color:#16a085;font-family:'Montserrat','Segoe UI',Arial,sans-serif;font-weight:900;letter-spacing:1px;margin-bottom:2.2rem;text-transform:uppercase;">Campus Life</h2>
+  <div class="campus-life-cards" style="display:flex;flex-wrap:wrap;gap:2.5rem;justify-content:center;align-items:stretch;">
+    <!-- Student Experience Card -->
+    <div class="campus-card" style="background:linear-gradient(135deg,#e0f7fa 0%,#f3e5f5 100%);border-radius:20px;box-shadow:0 8px 32px #16a08522;padding:1.7rem;max-width:340px;flex:1 1 260px;display:flex;flex-direction:column;align-items:center;animation: fadeInUp 1s both;">
+      <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/WhatsApp Image 2025-07-02 at 21.47.08_4b4d713a.jpg" alt="Student Experience" style="width:100%;max-width:200px;height:120px;object-fit:cover;border-radius:14px;margin-bottom:1rem;box-shadow:0 2px 8px #16a08533;animation: fadeInLeft 1.2s;" />
+      <h3 style="color:#16a085;font-size:1.3rem;font-weight:800;margin-bottom:0.7rem;letter-spacing:1px;">Student Experience</h3>
+      <p style="font-size:1.07rem;color:#003366;font-weight:500;">Experience a lively campus atmosphere with opportunities to join clubs, make friends, and participate in exciting events. Our campus is built for creativity, collaboration, and personal growth.</p>
+    </div>
+    <!-- Facilities Card -->
+    <div class="campus-card" style="background:linear-gradient(135deg,#f3e5f5 0%,#e0f7fa 100%);border-radius:20px;box-shadow:0 8px 32px #7c43bd22;padding:1.7rem;max-width:340px;flex:1 1 260px;display:flex;flex-direction:column;align-items:center;animation: fadeInUp 1.2s 0.1s both;">
+      <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/DSC09919-1-480x554 (1).jpg" alt="Facilities" style="width:100%;max-width:200px;height:120px;object-fit:cover;border-radius:14px;margin-bottom:1rem;box-shadow:0 2px 8px #7c43bd33;animation: fadeInRight 1.2s;" />
+      <h3 style="color:#7c43bd;font-size:1.3rem;font-weight:800;margin-bottom:0.7rem;letter-spacing:1px;">Facilities</h3>
+      <ul style="font-size:1.07rem;color:#003366;font-weight:500;padding-left:1.2rem;margin:0;list-style:disc inside;">
+        <li>Modern Hostels</li>
+        <li>Sports Complex</li>
+        <li>Student Cafeteria</li>
+        <li>24/7 Library</li>
+        <li>Innovation & Research Centers</li>
+        <li>Wellness Programs</li>
+        <li>Clubs & Societies</li>
+      </ul>
+    </div>
+    <!-- Campus Activities Card -->
+    <div class="campus-card" style="background:linear-gradient(135deg,#e0f7fa 0%,#f3e5f5 100%);border-radius:20px;box-shadow:0 8px 32px #16a08522;padding:1.7rem;max-width:340px;flex:1 1 260px;display:flex;flex-direction:column;align-items:center;animation: fadeInUp 1.2s 0.2s both;">
+      <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/DSC099911-1-480x554.jpg" alt="Campus Activities" style="width:100%;max-width:200px;height:120px;object-fit:cover;border-radius:14px;margin-bottom:1rem;box-shadow:0 2px 8px #16a08533;animation: fadeInLeft 1.2s;" />
+      <h3 style="color:#16a085;font-size:1.3rem;font-weight:800;margin-bottom:0.7rem;letter-spacing:1px;">Campus Activities</h3>
+      <p style="font-size:1.07rem;color:#003366;font-weight:500;">Join in cultural festivals, tech competitions, leadership workshops, and community service. There’s always something new to discover and enjoy at ICST!</p>
+    </div>
+    <!-- Support Services Card -->
+    <div class="campus-card" style="background:linear-gradient(135deg,#f3e5f5 0%,#e0f7fa 100%);border-radius:20px;box-shadow:0 8px 32px #7c43bd22;padding:1.7rem;max-width:340px;flex:1 1 260px;display:flex;flex-direction:column;align-items:center;animation: fadeInUp 1.2s 0.3s both;">
+      <img src="C:/Users/jabir/OneDrive/Desktop/New folder (4)/WhatsApp Image 2025-07-02 at 21.47.08_4b4d713a.jpg" alt="Support Services" style="width:100%;max-width:200px;height:120px;object-fit:cover;border-radius:14px;margin-bottom:1rem;box-shadow:0 2px 8px #7c43bd33;animation: fadeInRight 1.2s;" />
+      <h3 style="color:#7c43bd;font-size:1.3rem;font-weight:800;margin-bottom:0.7rem;letter-spacing:1px;">Support Services</h3>
+      <p style="font-size:1.07rem;color:#003366;font-weight:500;">Access dedicated support including counseling, career guidance, and a safe, inclusive environment. We’re here to help you succeed and feel at home.</p>
+    </div>
+  </div>
+</section>
+<style>
+  .campus-life-section {
+    background: #f9f9f9;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px #16a08511;
+    margin-bottom: 2.5rem;
+  }
+  .campus-life-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .campus-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px #e67e2222, 0 1px 0 #fff8 inset;
+    border: 2px solid #e67e22;
+    min-width: 260px;
+    max-width: 320px;
+    flex: 1 1 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.7rem 1.2rem 1.2rem 1.2rem;
+    position: relative;
+    transition: transform 0.28s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.28s, border 0.18s, background 0.18s;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .campus-card:hover, .campus-card:focus-within, .campus-card:active {
+    background: linear-gradient(135deg, #e67e22 0%, #16a085 100%);
+    box-shadow: 0 12px 36px #e67e2233, 0 2px 8px #16a08522;
+    border: 2px solid #16a085;
+    transform: translateY(-8px) scale(1.03);
+  }
+  .campus-card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #e67e22 0%, #16a085 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+    box-shadow: 0 2px 12px #16a08522, 0 1px 0 #fff8 inset;
+    border: 2px solid #e67e22;
+    margin-bottom: 1.1rem;
+    transition: background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s;
+  }
+  .campus-card:hover .campus-card-icon,
+  .campus-card:focus-within .campus-card-icon,
+  .campus-card:active .campus-card-icon {
+    background: linear-gradient(135deg, #16a085 0%, #e67e22 100%);
+    color: #fff;
+    box-shadow: 0 4px 24px #e67e2255, 0 2px 8px #16a08522;
+    border: 2.5px solid #16a085;
+  }
+  .campus-card-content h3 {
+    font-size: 1.13rem;
+    font-weight: 800;
+    color: #16a085;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.2px;
+    font-family: 'Montserrat','Segoe UI',Arial,sans-serif;
+    text-shadow: 0 1px 0 #fff8, 0 2px 8px #16a08511;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .campus-card-content p, .campus-card-content ul {
+    font-size: 1.01rem;
+    color: #16a085;
+    font-weight: 500;
+    margin-bottom: 0.7rem;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  .campus-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .campus-features-list li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #e67e22;
+    font-weight: 600;
+    font-size: 1.01rem;
+  }
+  .campus-features-list i {
+    color: #16a085;
+    font-size: 1.1rem;
+    min-width: 18px;
+  }
+  .campus-card-img {
+    width: 100%;
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    margin-bottom: 1.1rem;
+    box-shadow: 0 2px 8px #16a08522;
+    transition: filter 0.22s;
+  }
+  /* .campus-gallery-btn styles removed */
+  @media (max-width: 900px) {
+    .campus-life-cards {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .campus-card {
+      min-width: 98vw;
+      max-width: 98vw;
+      margin: 0.7rem auto;
+    }
+  }
+</style>
+<script>
+  // Campus Gallery Modal logic removed
+</script>
+
+
+
+<section id="contact" class="contact-neumorph">
+  <h2 class="contact-title-n">Contact Us</h2>
+  <div class="contact-flex-n">
+    <div class="contact-info-n">
+      <h3>General Contact Information</h3>
+      <p><strong>Address</strong><br><span>ICST, University Park</span></p>
+      <p><strong>Contact</strong><br>Mobile: <span class="contact-accent-n">+94 743 444 444</span><br>Mail: <a href="mailto:admissions@icst.edu.lk">admissions@icst.edu.lk</a></p>
+      <p><strong>Hour of operation</strong><br><span class="contact-hours-n">8:30 am - 7:00 pm</span></p>
+    </div>
+    <form class="contact-form-n">
+      <label for="contact-name">Your name</label>
+      <input id="contact-name" name="name" type="text" placeholder="Enter your name" required>
+      <label for="contact-email">Your email</label>
+      <input id="contact-email" name="email" type="email" placeholder="Enter your email" required>
+      <label for="contact-subject">Subject</label>
+      <input id="contact-subject" name="subject" type="text" placeholder="Subject" required>
+      <label for="contact-message">Your message (optional)</label>
+      <textarea id="contact-message" name="message" placeholder="Type your message..." rows="3"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<style>
+.contact-neumorph {
+  background: #e0e5ec;
+  padding: 2.5rem 1rem 2.5rem 1rem;
+  margin: 2rem auto 3rem;
+  border-radius: 32px;
+  max-width: 1100px;
+  box-shadow: 8px 8px 24px #b8bac0, -8px -8px 24px #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+.contact-title-n {
+  text-align: center;
+  color: #3a3a3a;
+  margin-bottom: 2.2rem;
+  font-family: 'Montserrat','Segoe UI',Arial,sans-serif;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 8px #fff, 0 2px 8px #b8bac0;
+  font-size: 2.5rem;
+  animation: fadeInUp 1s 0.1s both;
+}
+.contact-flex-n {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  align-items: stretch;
+}
+.contact-info-n, .contact-form-n {
+  flex: 1 1 320px;
+  min-width: 260px;
+  max-width: 400px;
+  background: #e0e5ec;
+  border-radius: 24px;
+  box-shadow: 8px 8px 24px #b8bac0, -8px -8px 24px #ffffff;
+  padding: 2.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: none;
+  animation: neumorphPop 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.contact-info-n h3 {
+  color: #3a3a3a;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  letter-spacing: 1px;
+}
+.contact-info-n p, .contact-info-n span, .contact-info-n a {
+  color: #3a3a3a;
+  font-weight: 500;
+  text-shadow: 0 1px 8px #fff;
+}
+.contact-info-n a {
+  color: #5b7fff;
+  font-weight: 700;
+  text-decoration: underline;
+}
+.contact-accent-n {
+  color: #5b7fff;
+  font-weight: 700;
+}
+.contact-hours-n {
+  color: #ffb347;
+  font-weight: 700;
+}
+.contact-form-n label {
+  font-weight: 700;
+  color: #3a3a3a;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.2rem;
+  text-shadow: 0 1px 8px #fff;
+}
+.contact-form-n input, .contact-form-n textarea {
+  padding: 0.7rem 1rem;
+  border-radius: 14px;
+  border: none;
+  font-size: 1rem;
+  background: #e0e5ec;
+  color: #3a3a3a;
+  box-shadow: inset 4px 4px 12px #b8bac0, inset -4px -4px 12px #ffffff;
+  transition: box-shadow 0.2s, background 0.2s;
+  outline: none;
+  margin-bottom: 0.2rem;
+}
+.contact-form-n input:focus, .contact-form-n textarea:focus {
+  box-shadow: 0 0 0 2px #5b7fff55, inset 4px 4px 12px #b8bac0, inset -4px -4px 12px #ffffff;
+  background: #f7f8fa;
+}
+.contact-form-n button {
+  margin-top: 1rem;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: #e0e5ec;
+  color: #5b7fff;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 4px 4px 16px #b8bac0, -4px -4px 16px #ffffff;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+  letter-spacing: 1px;
+  animation: neumorphBtnPulse 2s infinite alternate;
+}
+.contact-form-n button:hover, .contact-form-n button:focus {
+  background: #f7f8fa;
+  color: #3a3a3a;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 8px 8px 24px #b8bac0, -8px -8px 24px #ffffff;
+}
+@keyframes neumorphPop {
+  0% { opacity: 0; transform: scale(0.95) translateY(40px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes neumorphBtnPulse {
+  0% { box-shadow: 4px 4px 16px #b8bac0, -4px -4px 16px #ffffff; }
+  100% { box-shadow: 8px 8px 32px #b8bac0, -8px -8px 32px #ffffff; }
+}
+@media (max-width: 900px) {
+  .contact-flex-n {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .contact-info-n, .contact-form-n {
+    max-width: 98vw;
+    margin: 0 auto;
+  }
+}
+</style>
+
+<style>
+@keyframes fadeInContact {
+  from { opacity: 0; transform: translateY(40px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulseBtn {
+  0% { box-shadow: 0 0 0 0 #7c43bd44; }
+  70% { box-shadow: 0 0 0 10px #7c43bd00; }
+  100% { box-shadow: 0 0 0 0 #7c43bd00; }
+}
+</style>
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="login-modal">
+  <div class="modal-content">
+    <span class="close" data-close>&times;</span>
+    <h2>Login</h2>
+    <form>
+      <label>Email</label>
+      <input type="email" placeholder="Enter email" required />
+      <label>Password</label>
+      <input type="password" placeholder="Enter password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="#" id="switch-to-signup">Sign up here</a></p>
+  </div>
+</div>
+
+<!-- SIGNUP MODAL -->
+<div class="modal" id="signup-modal">
+  <div class="modal-content">
+    <span class="close" data-close>&times;</span>
+    <h2>Sign Up</h2>
+    <form>
+      <label>Name</label>
+      <input type="text" placeholder="Your name" required />
+      <label>Email</label>
+      <input type="email" placeholder="Your email" required />
+      <label>Password</label>
+      <input type="password" placeholder="Create password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="#" id="switch-to-login">Log in here</a></p>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 ICST University Park. All rights reserved.
+</footer>
+
+<script>
+  // Academic Program box interactivity
+  document.addEventListener('DOMContentLoaded', function() {
+    const programBoxes = document.querySelectorAll('.program-box');
+    programBoxes.forEach(box => {
+      box.addEventListener('click', function(e) {
+        // Only toggle if not clicking a link inside details
+        if (e.target.closest('a')) return;
+        if (this.classList.contains('active')) {
+          this.classList.remove('active');
+        } else {
+          programBoxes.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+        }
+      });
+      box.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+  });
+  // Feature card fade-in on scroll
+  function revealFeatures() {
+    const features = document.querySelectorAll('.feature');
+    const trigger = window.innerHeight * 0.92;
+    features.forEach(f => {
+      const top = f.getBoundingClientRect().top;
+      if (top < trigger) f.classList.add('visible');
+      else f.classList.remove('visible');
+    });
+  }
+  window.addEventListener('scroll', revealFeatures);
+  window.addEventListener('DOMContentLoaded', revealFeatures);
+
+  // Animate advantages cards on scroll
+  function revealAdvantages() {
+    const cards = document.querySelectorAll('.advantage-card');
+    const trigger = window.innerHeight * 0.92;
+    cards.forEach(card => {
+      const top = card.getBoundingClientRect().top;
+      if (top < trigger) card.style.animationPlayState = 'running';
+    });
+  }
+  window.addEventListener('scroll', revealAdvantages);
+  window.addEventListener('DOMContentLoaded', revealAdvantages);
+
+  // Header button and social icon ripple effect
+  document.querySelectorAll('.header-buttons button, .social-icons img').forEach(el => {
+    el.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.left = (e.offsetX || 10) + 'px';
+      ripple.style.top = (e.offsetY || 10) + 'px';
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+
+  // Modal logic
+  const loginModal = document.getElementById("login-modal");
+  const signupModal = document.getElementById("signup-modal");
+  document.getElementById("open-login").onclick = (e) => {
+    e.preventDefault();
+    loginModal.style.display = "block";
+    setTimeout(() => loginModal.querySelector('input[type=email]').focus(), 200);
+  };
+  document.getElementById("open-signup").onclick = (e) => {
+    e.preventDefault();
+    signupModal.style.display = "block";
+    setTimeout(() => signupModal.querySelector('input[type=text]').focus(), 200);
+  };
+  document.getElementById("switch-to-signup").onclick = (e) => {
+    e.preventDefault();
+    loginModal.style.display = "none";
+    signupModal.style.display = "block";
+    setTimeout(() => signupModal.querySelector('input[type=text]').focus(), 200);
+  };
+  document.getElementById("switch-to-login").onclick = (e) => {
+    e.preventDefault();
+    signupModal.style.display = "none";
+    loginModal.style.display = "block";
+    setTimeout(() => loginModal.querySelector('input[type=email]').focus(), 200);
+  };
+  document.querySelectorAll("[data-close]").forEach((el) =>
+    el.addEventListener("click", () => {
+      loginModal.style.display = "none";
+      signupModal.style.display = "none";
+    })
+  );
+  window.onclick = function (event) {
+    if (event.target == loginModal || event.target == signupModal) {
+      loginModal.style.display = "none";
+      signupModal.style.display = "none";
+    }
+  };
+
+  // Floating logo visibility on scroll
+  window.addEventListener('scroll', function() {
+    const logo = document.getElementById('icst-floating-logo');
+    if (window.scrollY > 120) {
+      logo.classList.add('visible');
+    } else {
+      logo.classList.remove('visible');
+    }
+  });
+</script>
+</body>
+</html>
